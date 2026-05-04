@@ -75,8 +75,8 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "טלפון",
-      value: "03-123-4567",
-      href: "tel:+972-3-1234567",
+      value: "08-8695008",
+      href: "tel:+972-8-8695008",
     },
     {
       icon: Mail,
@@ -254,7 +254,7 @@ const ContactSection = () => {
 
             {/* WhatsApp Button */}
             <a
-              href="https://wa.me/97231234567?text=שלום, אשמח לקבל ייעוץ משפטי"
+              href="https://wa.me/97288695008?text=שלום, אשמח לקבל ייעוץ משפטי"
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -266,7 +266,7 @@ const ContactSection = () => {
             </a>
 
             {/* Quick Call Button (Mobile) */}
-            <a href="tel:+972-3-1234567" className="block md:hidden">
+            <a href="tel:+972-8-8695008" className="block md:hidden">
               <Button variant="phone" size="lg" className="w-full">
                 <Phone className="w-5 h-5" />
                 חייגו עכשיו
