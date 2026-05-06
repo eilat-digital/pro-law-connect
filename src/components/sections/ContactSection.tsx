@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Printer } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Printer, ExternalLink } from "lucide-react";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -247,12 +247,25 @@ const ContactSection = () => {
                       href={info.href}
                       target={info.href.startsWith("http") ? "_blank" : undefined}
                       rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-foreground font-medium hover:text-gold transition-colors"
+                      className="text-foreground font-medium hover:text-gold transition-colors inline-flex items-center gap-1"
                     >
                       {info.value}
+                      {info.title === "כתובת" && (
+                        <ExternalLink className="w-3 h-3 text-muted-foreground" />
+                      )}
                     </a>
                   ) : (
                     <p className="text-foreground font-medium">{info.value}</p>
+                  )}
+                  {info.title === "כתובת" && (
+                    <a
+                      href={info.href || ""}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-gold hover:underline mt-1 inline-block"
+                    >
+                      הצג בגוגל מפות
+                    </a>
                   )}
                 </div>
               </div>
@@ -292,6 +305,16 @@ const ContactSection = () => {
                 title="מיקום המשרד"
               />
             </div>
+            <a
+              href="https://maps.google.com/?q=שדרות+התמרים+4,+אילת"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3 px-4 bg-card rounded-xl border border-border text-gold font-medium hover:bg-gold/5 transition-colors"
+            >
+              <MapPin className="w-4 h-4" />
+              הצג בגוגל מפות
+              <ExternalLink className="w-3 h-3" />
+            </a>
           </div>
         </div>
       </div>
