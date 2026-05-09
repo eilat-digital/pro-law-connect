@@ -15,7 +15,7 @@ const PrivacyPolicyPage = () => {
           content="הצהרת פרטיות של משרד שירן שושני - עורכי דין, נוטריון וגישור."
         />
       </Helmet>
-      <div className="min-h-screen flex flex-col" dir="rtl">
+      <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 pt-32 pb-24">
           <div className="container mx-auto px-4 max-w-3xl">
