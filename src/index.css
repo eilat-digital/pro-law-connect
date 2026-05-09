@@ -212,3 +212,68 @@
 ::selection {
   @apply bg-accent/20 text-foreground;
 }
+
+/* ===== Accessibility widget classes ===== */
+html.a11y-large-text { font-size: 112.5%; }
+html.a11y-xlarge-text { font-size: 125%; }
+html.a11y-small-text { font-size: 92%; }
+
+html.a11y-readable-font,
+html.a11y-readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0.02em;
+}
+
+html.a11y-high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 60 100% 50%;
+  --card: 0 0% 0%;
+  --card-foreground: 60 100% 50%;
+  --popover: 0 0% 0%;
+  --popover-foreground: 60 100% 50%;
+  --primary: 60 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 60 100% 50%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 60 100% 80%;
+  --accent: 60 100% 50%;
+  --accent-foreground: 0 0% 0%;
+  --border: 60 100% 50%;
+  --input: 0 0% 10%;
+  --ring: 60 100% 50%;
+  --gold: 60 100% 50%;
+  --gold-light: 60 100% 65%;
+  --gold-dark: 60 100% 40%;
+  --navy: 0 0% 0%;
+  --navy-light: 0 0% 10%;
+  --cream: 60 100% 50%;
+  --cream-dark: 60 100% 80%;
+}
+html.a11y-high-contrast img,
+html.a11y-high-contrast video { filter: grayscale(100%) contrast(1.2); }
+
+html.a11y-grayscale,
+html.a11y-grayscale * { filter: grayscale(100%) !important; }
+
+html.a11y-highlight-links a,
+html.a11y-highlight-links button {
+  outline: 2px solid hsl(var(--accent)) !important;
+  outline-offset: 2px;
+  text-decoration: underline !important;
+}
+
+html.a11y-large-cursor,
+html.a11y-large-cursor * {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='black' stroke='white' stroke-width='1.5'><path d='M3 2l7 18 2-8 8-2z'/></svg>") 0 0, auto !important;
+}
+
+html.a11y-stop-animations,
+html.a11y-stop-animations *,
+html.a11y-stop-animations *::before,
+html.a11y-stop-animations *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
