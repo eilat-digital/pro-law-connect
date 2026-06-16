@@ -135,7 +135,7 @@ const Index = () => {
                   ש.ש
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-3 leading-tight">
-                  שירן שושני
+                  שירן שושני — משרד עורכי דין, נוטריון וגישור
                 </h1>
                 <p className="text-accent text-lg tracking-[0.25em] mb-4">משרד עורכי דין</p>
                 <p className="text-foreground/80 text-base leading-relaxed">
@@ -298,7 +298,7 @@ const Index = () => {
                       {a.excerpt}
                     </p>
                     <button className="text-accent font-semibold text-sm hover:underline self-start">
-                      קרא עוד »
+                      קרא עוד על {a.title} »
                     </button>
                   </article>
                 ))}
