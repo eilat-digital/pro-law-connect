@@ -298,7 +298,7 @@ const Index = () => {
                       {a.excerpt}
                     </p>
                     <button className="text-accent font-semibold text-sm hover:underline self-start">
-                      קרא עוד »
+                      קרא עוד על {a.title} »
                     </button>
                   </article>
                 ))}
