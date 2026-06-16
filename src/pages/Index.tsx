@@ -7,20 +7,35 @@ import ContactForm from "@/components/sections/ContactForm";
 import FloatingButtons from "@/components/FloatingButtons";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
 import heroImage from "@/assets/shiran-hero.jpg";
+import {
+  Handshake,
+  Baby,
+  ShieldAlert,
+  HeartCrack,
+  Wallet,
+  MessageSquareWarning,
+  Home,
+  FileX2,
+  Scale,
+  ScrollText,
+  FileSignature,
+  Stamp,
+  type LucideIcon,
+} from "lucide-react";
 
-const practiceAreas = [
-  { title: "יישוב סכסוך", desc: "ליווי משפטי מלא מהגשת הבקשה ועד לסיום ההליך" },
-  { title: "משמורת", desc: "החזקת ילדים, זמני שהות, אפוטרופסות, ניכור הורי, אחריות הורית" },
-  { title: "אלימות במשפחה", desc: "צווי הגנה, ביטול צווי הגנה" },
-  { title: "גירושין", desc: "ניהול תיקי גירושין בבית הדין הרבני, תביעות לשלום בית, כתובה, מזונות אישה" },
-  { title: "מזונות", desc: "מזונות ילדים, מזונות אישה, הגדלת מזונות, הפחתת מזונות, ביטול מזונות" },
-  { title: "לשון הרע", desc: "תביעות לשון הרע בין בני זוג" },
-  { title: "רכוש", desc: "תביעות רכוש, פירוק שיתוף, איזון משאבים, ביטול הסכמים, תביעות כספיות" },
-  { title: "התרת נישואים", desc: "לזוגות שנישאו בנישואים אזרחיים" },
-  { title: "ייצוג משפטי", desc: "ייצוג בבתי המשפט ובבתי הדין הרבניים" },
-  { title: "ירושות וצוואות", desc: "עריכת צוואות, התנגדות לצו קיום צוואה, צווי ירושה" },
-  { title: "הסכמים", desc: "הסכמי גירושין, ממון, שלום בית, חיים משותפים, הורות משותפת, מכר/קניה" },
-  { title: "נוטריון וגישור", desc: "אישורי נוטריון, תרגומים, ייפויי כוח וגישור משפחתי" },
+const practiceAreas: { title: string; desc: string; Icon: LucideIcon }[] = [
+  { title: "יישוב סכסוך", desc: "ליווי משפטי מלא מהגשת הבקשה ועד לסיום ההליך", Icon: Handshake },
+  { title: "משמורת", desc: "החזקת ילדים, זמני שהות, אפוטרופסות, ניכור הורי, אחריות הורית", Icon: Baby },
+  { title: "אלימות במשפחה", desc: "צווי הגנה, ביטול צווי הגנה", Icon: ShieldAlert },
+  { title: "גירושין", desc: "ניהול תיקי גירושין בבית הדין הרבני, תביעות לשלום בית, כתובה, מזונות אישה", Icon: HeartCrack },
+  { title: "מזונות", desc: "מזונות ילדים, מזונות אישה, הגדלת מזונות, הפחתת מזונות, ביטול מזונות", Icon: Wallet },
+  { title: "לשון הרע", desc: "תביעות לשון הרע בין בני זוג", Icon: MessageSquareWarning },
+  { title: "רכוש", desc: "תביעות רכוש, פירוק שיתוף, איזון משאבים, ביטול הסכמים, תביעות כספיות", Icon: Home },
+  { title: "התרת נישואים", desc: "לזוגות שנישאו בנישואים אזרחיים", Icon: FileX2 },
+  { title: "ייצוג משפטי", desc: "ייצוג בבתי המשפט ובבתי הדין הרבניים", Icon: Scale },
+  { title: "ירושות וצוואות", desc: "עריכת צוואות, התנגדות לצו קיום צוואה, צווי ירושה", Icon: ScrollText },
+  { title: "הסכמים", desc: "הסכמי גירושין, ממון, שלום בית, חיים משותפים, הורות משותפת, מכר/קניה", Icon: FileSignature },
+  { title: "נוטריון וגישור", desc: "אישורי נוטריון, תרגומים, ייפויי כוח וגישור משפחתי", Icon: Stamp },
 ];
 
 const services = [
@@ -180,15 +195,18 @@ const Index = () => {
               </h2>
               <div className="w-16 h-px bg-accent mx-auto mb-14" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {practiceAreas.map((a) => (
+                {practiceAreas.map(({ title, desc, Icon }) => (
                   <article
-                    key={a.title}
+                    key={title}
                     className="bg-card border border-border p-7 hover:border-accent transition-colors group"
                   >
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full border border-accent/40 text-accent mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                      <Icon size={24} strokeWidth={1.5} />
+                    </div>
                     <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                      {a.title}
+                      {title}
                     </h3>
-                    <p className="text-foreground/70 leading-relaxed text-sm">{a.desc}</p>
+                    <p className="text-foreground/70 leading-relaxed text-sm">{desc}</p>
                   </article>
                 ))}
               </div>
