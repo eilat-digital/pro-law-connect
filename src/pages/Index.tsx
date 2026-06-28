@@ -125,7 +125,7 @@ const Index = () => {
           <section id="hero" className="relative w-full h-[55vh] md:h-[80vh] min-h-[400px] md:min-h-[520px] overflow-hidden">
             <img
               src={heroImage.url}
-              alt="עו\"ד שירן שושני"
+              alt="עו״ד שירן שושני"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-background/70 via-background/10 to-transparent" />
