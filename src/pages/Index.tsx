@@ -126,9 +126,9 @@ const Index = () => {
             <img
               src={heroImage.url}
               alt="עו״ד שירן שושני"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-right"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-background/70 via-background/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-l from-background via-background via-[45%] to-transparent to-[70%]" />
             <div className="relative container mx-auto px-6 h-full flex items-center justify-start">
               <div className="max-w-md text-right">
                 <div className="w-20 h-20 rounded-full border-2 border-accent bg-background/80 flex items-center justify-center mb-6 font-serif text-accent text-2xl">
