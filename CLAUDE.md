@@ -33,7 +33,7 @@ SPA with react-router. Routes are declared in `src/App.tsx`:
 
 ### Decap CMS
 
-`public/admin/` (index.html + config.yml) is served statically. It only works on the deployed Netlify site after enabling Identity + Git Gateway; there is no local CMS backend. CMS saves commit directly to `main`, which triggers a Netlify rebuild.
+`public/admin/` (index.html + config.yml) is served statically. Auth is the `github` backend via Netlify's hosted OAuth service (`base_url: https://api.netlify.com`) — NOT Netlify Identity, which is deprecated and was removed from this setup. Requires a GitHub OAuth App (callback `https://api.netlify.com/auth/done`) installed under Netlify Site configuration → Access & security → OAuth. Editors log in with a GitHub account that has write access to the repo. CMS saves commit directly to `main`, which triggers a Netlify rebuild; there is no local CMS backend.
 
 ### Page shell pattern
 

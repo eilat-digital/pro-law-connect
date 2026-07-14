@@ -1,9 +1,14 @@
 # הגדרות פאנל הניהול (Decap CMS)
-# הפאנל זמין בכתובת: https://<האתר-שלך>/admin/  (רק אחרי פריסה ב-Netlify + הפעלת Identity ו-Git Gateway)
+# הפאנל זמין בכתובת: https://<האתר-שלך>/admin/
+# אימות: GitHub OAuth דרך שירות ה-OAuth של Netlify (לא Netlify Identity שהוצא משימוש).
+# הגדרה חד-פעמית: OAuth App ב-GitHub + Install provider ב-Netlify — ראו הנחיות-עריכה.md
 
 backend:
-  name: git-gateway
+  name: github
+  repo: shoshanilawoffice-pixel/pro-law-connect
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
   commit_messages:
     create: "תוכן: נוצר {{slug}}"
     update: "תוכן: עודכן {{slug}}"
