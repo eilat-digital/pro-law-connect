@@ -176,9 +176,9 @@ const Index = () => {
             <img
               src="/shoshani-portrait.jpeg"
               alt="עו״ד שירן שושני-אוכמן"
-              className="absolute inset-0 w-full h-full object-cover object-right"
+              className="absolute inset-0 w-full h-full object-cover object-top"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-background via-background via-[45%] to-transparent to-[70%]" />
+            <div className="absolute inset-0 bg-gradient-to-l from-background/90 via-background/45 via-[22%] to-transparent to-[45%]" />
             <div className="relative container mx-auto px-6 h-full flex items-center justify-start">
               <div className="max-w-md text-right">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-accent bg-black mb-6">
