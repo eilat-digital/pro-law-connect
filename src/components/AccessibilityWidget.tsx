@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 
 type FontSize = "default" | "lg" | "xl";
-type Contrast = "default" | "high";
+type Contrast = "default" | "high" | "yellow";
 type Motion = "default" | "reduced";
 type Toggle = "off" | "on";
 
@@ -163,6 +163,14 @@ const AccessibilityWidget = () => {
               active={state.contrast === "high"}
               onClick={() =>
                 update({ contrast: state.contrast === "high" ? "default" : "high" })
+              }
+            />
+            <ToggleRow
+              icon={<Contrast className="w-4 h-4" />}
+              label="ניגודיות שחור/צהוב"
+              active={state.contrast === "yellow"}
+              onClick={() =>
+                update({ contrast: state.contrast === "yellow" ? "default" : "yellow" })
               }
             />
             <ToggleRow

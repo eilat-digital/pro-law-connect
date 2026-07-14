@@ -1,11 +1,12 @@
 import { Phone, MessageCircle } from "lucide-react";
+import { site } from "@/config/site";
 
 const FloatingButtons = () => {
   return (
     <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/972506421322?text=שלום, אשמח לקבל ייעוץ משפטי"
+        href={site.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
@@ -19,7 +20,7 @@ const FloatingButtons = () => {
 
       {/* Phone Button (visible on mobile) */}
       <a
-        href="tel:+972-50-6421322"
+        href={`tel:${site.mobileIntl}`}
         className="w-14 h-14 rounded-full bg-gold flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group md:hidden"
         aria-label="התקשר עכשיו"
       >

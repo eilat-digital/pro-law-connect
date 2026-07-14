@@ -1,22 +1,37 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logoAsset from "@/assets/logo.jpeg.asset.json";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { site } from "@/config/site";
 
 const navItems = [
+  { id: "practice", label: "תחומי עיסוק" },
   { id: "about", label: "אודות" },
   { id: "services", label: "שירותי המשרד" },
-  { id: "practice", label: "תחומי עיסוק" },
+  { id: "testimonials", label: "המלצות" },
   { id: "articles", label: "מאמרים" },
   { id: "contact", label: "יצירת קשר" },
 ];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const go = (id: string) => {
     setOpen(false);
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const goHome = () => {
+    setOpen(false);
+    if (location.pathname !== "/") navigate("/");
+    else window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -24,18 +39,18 @@ const Header = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo — right */}
-          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 group">
+          <button onClick={goHome} className="flex items-center gap-3 group">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-black border-2 border-accent flex items-center justify-center shrink-0">
-              <img src={logoAsset.url} alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
+              <img src="/logo.jpeg" alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col text-right leading-tight">
-              <span className="text-foreground font-bold text-lg">שירן שושני</span>
-              <span className="text-muted-foreground text-[11px] tracking-wider">משרד עורכי דין</span>
+              <span className="text-foreground font-bold text-lg">{site.name}</span>
+              <span className="text-muted-foreground text-[11px] tracking-wider">{site.tagline}</span>
             </div>
           </button>
 
           {/* Desktop nav — left */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {navItems.map((n) => (
               <button
                 key={n.id}
@@ -45,16 +60,27 @@ const Header = () => {
                 {n.label}
               </button>
             ))}
+            <Link
+              to="/mitgashrim"
+              className="text-accent hover:text-foreground font-semibold text-[15px] transition-colors"
+            >
+              מתגשרים
+            </Link>
+            <LanguageSwitcher />
           </nav>
 
-          {/* Mobile toggle */}
-          <button
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setOpen(!open)}
-            aria-label="תפריט"
-          >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile: language + toggle */}
+          <div className="flex items-center gap-1 lg:hidden">
+            <LanguageSwitcher />
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setOpen(!open)}
+              aria-label="תפריט"
+              aria-expanded={open}
+            >
+              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {open && (
@@ -68,6 +94,13 @@ const Header = () => {
                 {n.label}
               </button>
             ))}
+            <Link
+              to="/mitgashrim"
+              onClick={() => setOpen(false)}
+              className="text-right px-4 py-3 text-accent font-semibold hover:bg-muted rounded-md transition-colors"
+            >
+              מתגשרים – התוכנית הייחודית שלנו
+            </Link>
           </nav>
         )}
       </div>

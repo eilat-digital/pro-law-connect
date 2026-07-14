@@ -3,26 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>שירן שושני - עורכי דין, נוטריון וגישור</title>
-    <meta name="description" content="שירן שושני - חברת עורכי דין, נוטריון וגישור. ייעוץ וייצוג משפטי מקצועי, שירותי נוטריון וגישור.">
+    <title>עורכת דין שירן שושני | דיני משפחה, גירושין, נוטריון וגישור באילת</title>
+    <meta name="description" content="משרד עו״ד שירן שושני באילת – מעמד אישי, גירושין, גישור בתוכנית ״מתגשרים״, צוואות וירושות, חדלות פירעון ונוטריון. ליווי אישי ומקצועי. 054-8151301">
     <meta name="author" content="שירן שושני" />
 
-    
-    
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b981e3cd-5264-4ebf-b567-850ffaf93ee0/id-preview-c86bb382--52259fb8-b696-48a3-9d9d-fd4133fb5c80.lovable.app-1781101264479.png">
+    <meta property="og:image" content="/shoshani-portrait.jpeg">
+    <meta property="og:title" content="עורכת דין שירן שושני | דיני משפחה, נוטריון וגישור באילת">
+    <meta property="og:description" content="משרד עו״ד שירן שושני באילת – מעמד אישי, גירושין, גישור, צוואות וירושות ונוטריון. ליווי אישי ומקצועי לתיאום פגישת ייעוץ.">
+    <meta property="og:locale" content="he_IL">
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b981e3cd-5264-4ebf-b567-850ffaf93ee0/id-preview-c86bb382--52259fb8-b696-48a3-9d9d-fd4133fb5c80.lovable.app-1781101264479.png">
-    <meta property="og:title" content="שירן שושני - עורכי דין, נוטריון וגישור">
-  <meta name="twitter:title" content="שירן שושני - עורכי דין, נוטריון וגישור">
-  <meta property="og:description" content="שירן שושני - חברת עורכי דין, נוטריון וגישור. ייעוץ וייצוג משפטי מקצועי, שירותי נוטריון וגישור.">
-  <meta name="twitter:description" content="שירן שושני - חברת עורכי דין, נוטריון וגישור. ייעוץ וייצוג משפטי מקצועי, שירותי נוטריון וגישור.">
-</head>
+    <meta name="twitter:image" content="/shoshani-portrait.jpeg">
+    <meta name="twitter:title" content="עורכת דין שירן שושני | דיני משפחה, נוטריון וגישור באילת">
+    <meta name="twitter:description" content="משרד עו״ד שירן שושני באילת – מעמד אישי, גירושין, גישור, צוואות וירושות ונוטריון.">
+  </head>
 
   <body>
+    <!-- טופס סטטי נסתר לזיהוי על ידי Netlify Forms (הטופס האמיתי נמצא ב-React) -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Netlify Identity — נדרש כדי שקישורי הזמנה/איפוס סיסמה לפאנל הניהול (/admin/) יעבדו -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

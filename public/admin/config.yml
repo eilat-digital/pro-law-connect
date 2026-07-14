@@ -1,0 +1,58 @@
+# הגדרות פאנל הניהול (Decap CMS)
+# הפאנל זמין בכתובת: https://<האתר-שלך>/admin/  (רק אחרי פריסה ב-Netlify + הפעלת Identity ו-Git Gateway)
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "תוכן: נוצר {{slug}}"
+    update: "תוכן: עודכן {{slug}}"
+    delete: "תוכן: נמחק {{slug}}"
+    uploadMedia: "תוכן: הועלה קובץ {{path}}"
+    deleteMedia: "תוכן: נמחק קובץ {{path}}"
+
+locale: he
+
+# תיקיית התמונות של הפרויקט (public/ מוגשת כשורש האתר ב-Vite)
+media_folder: "public"
+public_folder: "/"
+
+collections:
+  - name: "site"
+    label: "תוכן האתר"
+    files:
+      - name: "homepage"
+        label: "דף הבית"
+        file: "src/content/homepage.json"
+        fields:
+          - label: "אזור הפתיחה (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "כותרת ראשית", name: "title", widget: "string" }
+              - { label: "תיאור", name: "description", widget: "text" }
+
+          - label: "אודות המשרד"
+            name: "about"
+            widget: "list"
+            label_singular: "פסקה"
+            field: { label: "פסקה", name: "paragraph", widget: "text" }
+
+          - label: "תחומי עיסוק"
+            name: "practiceAreas"
+            widget: "list"
+            label_singular: "תחום עיסוק"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "שם התחום", name: "title", widget: "string" }
+              - { label: "תיאור", name: "desc", widget: "text" }
+
+          - label: "פרטי יצירת קשר"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "טלפון", name: "phone", widget: "string" }
+              - { label: "נייד", name: "mobile", widget: "string" }
+              - { label: "פקס", name: "fax", widget: "string" }
+              - { label: "אימייל", name: "email", widget: "string" }
+              - { label: "כתובת", name: "address", widget: "string" }

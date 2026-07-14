@@ -1,51 +1,112 @@
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
-const ContactForm = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
+    .join("&");
 
-  const submit = (e: React.FormEvent) => {
+const ContactForm = () => {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [sending, setSending] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone) {
       toast({ title: "שדות חסרים", description: "נא למלא שם וטלפון", variant: "destructive" });
       return;
     }
-    toast({ title: "הפנייה התקבלה", description: "ניצור איתך קשר בהקדם" });
-    setForm({ name: "", email: "", phone: "" });
+    setSending(true);
+    try {
+      // שליחה ל-Netlify Forms — עובד באתר החי (Netlify); בפיתוח מקומי רק מציג אישור
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...form }),
+      });
+      toast({ title: "הפנייה התקבלה", description: "ניצור איתך קשר בהקדם" });
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      toast({
+        title: "שגיאה בשליחה",
+        description: `ניתן ליצור קשר ישירות בטלפון 054-8151301`,
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
+
+  const inputCls =
+    "px-4 py-3 bg-background/60 border border-foreground/15 rounded-sm text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-accent transition-colors";
 
   return (
     <form
+      name="contact"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
       onSubmit={submit}
       className="grid grid-cols-1 md:grid-cols-4 gap-3 max-w-5xl mx-auto"
     >
+      {/* שדות נסתרים עבור Netlify */}
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden="true">
+        <label>
+          לא למילוי: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+
+      <label className="sr-only" htmlFor="contact-name">שם</label>
       <input
+        id="contact-name"
         type="text"
+        name="name"
         placeholder="שם:"
+        autoComplete="name"
         value={form.name}
         onChange={(e) => setForm({ ...form, name: e.target.value })}
-        className="px-4 py-3 bg-background/60 border border-foreground/15 rounded-sm text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-accent transition-colors"
+        className={inputCls}
       />
+      <label className="sr-only" htmlFor="contact-email">אימייל</label>
       <input
+        id="contact-email"
         type="email"
+        name="email"
         placeholder="אימייל:"
+        autoComplete="email"
         value={form.email}
         onChange={(e) => setForm({ ...form, email: e.target.value })}
-        className="px-4 py-3 bg-background/60 border border-foreground/15 rounded-sm text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-accent transition-colors"
+        className={inputCls}
       />
+      <label className="sr-only" htmlFor="contact-phone">טלפון</label>
       <input
+        id="contact-phone"
         type="tel"
+        name="phone"
         placeholder="טלפון:"
+        autoComplete="tel"
         value={form.phone}
         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-        className="px-4 py-3 bg-background/60 border border-foreground/15 rounded-sm text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-accent transition-colors"
+        className={inputCls}
       />
       <button
         type="submit"
-        className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/85 transition-colors"
+        disabled={sending}
+        className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary/85 transition-colors disabled:opacity-60"
       >
-        שליחה
+        {sending ? "שולח..." : "שליחה"}
       </button>
+
+      <label className="sr-only" htmlFor="contact-message">הודעה</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        placeholder="הודעה (לא חובה):"
+        rows={3}
+        value={form.message}
+        onChange={(e) => setForm({ ...form, message: e.target.value })}
+        className={`${inputCls} md:col-span-4 resize-y`}
+      />
     </form>
   );
 };
