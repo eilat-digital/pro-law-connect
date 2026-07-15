@@ -1,55 +1,76 @@
-# Practice Areas — Final Plan (20 items, 3 categories)
+# עיצוב חדש ל-Hero + תיקוני רספונסיביות
 
-## Data
+## הבעיה
+ב-`src/pages/Index.tsx` ה-Hero הוא תמונה ברוחב מלא בגובה `55vh / 80vh` עם `object-cover object-top`. בנייד היא מתפרסת על כל המסך, "בולעת" את הטקסט, ולפעמים מציגה חיתוך לא מחמיא של הפורטרט. בנוסף גובה קבוע ב-vh יוצר overflow אופקי במסכים צרים.
 
-`src/data/practiceAreas.ts`
+## הכיוון שנבחר — פורטרט קומפקטי בצד (Editorial)
 
-```ts
-export type PracticeArea = { slug: string; title: string; content: string; Icon: LucideIcon };
-export type Category = { id: string; title: string; items: PracticeArea[] };
+במקום תמונת רקע ענקית, ה-Hero יהפוך לבלוק תוכן מובנה: כותרת + פסקה + CTA בצד אחד, ופורטרט עגול/מלבני מעוגל קומפקטי בצד השני. אין יותר תמונה מלאת-מסך.
+
+### דסקטופ (≥ md)
+- Grid דו-טורי: טקסט (7/12) + פורטרט (5/12).
+- הפורטרט: `aspect-[4/5]`, `max-w-[380px]`, פינות `rounded-2xl`, מסגרת דקה `border-accent/30`, צל עדין, מיקום `object-top` כדי לשמור על הפנים.
+- רקע: gradient עדין (`from-background via-muted/30 to-background`) + אלמנט דקורטיבי דק (קו accent אנכי / חותמת "עו״ד").
+- ריפוד: `py-16 lg:py-24`, ללא `h-[80vh]`.
+
+### מובייל (< md)
+- Stack אנכי: פורטרט מרוכז למעלה כעיגול/מרובע מעוגל `w-40 h-48` (או `w-44 aspect-[4/5]`), אחריו כותרת → פסקה → CTA.
+- ללא `vh` — הגובה נקבע לפי התוכן. `px-5` צמוד ולא `px-6` כדי לצמצם overflow.
+- כותרת: `text-3xl` במקום `text-4xl` בנייד; leading הדוק יותר.
+
+### שינוי בקוד
+`src/pages/Index.tsx` — סקשן ה-hero בלבד (סביב שורות 108-138). ה-JSON (`content.hero.image/title/description/ctaText`) לא משתנה, רק ה-markup וה-classes.
+
+מבנה חדש (סקיצה):
+```text
+<section id="hero" className="relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background">
+  <div className="container mx-auto px-5 md:px-6 py-14 md:py-20 lg:py-24">
+    <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+      <div className="md:col-span-7 order-2 md:order-1 text-right">
+        {logo circle 16x16}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl ...">{title}</h1>
+        <Markdown>{description}</Markdown>
+        {CTA}
+      </div>
+      <div className="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-start">
+        <div className="relative w-40 md:w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-accent/30 shadow-xl">
+          <img src={hero.image} className="w-full h-full object-cover object-top" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 ```
 
-Exactly 20 items in 3 categories, no additions/renames:
+עדיפות ל-`order`: במובייל הפורטרט למעלה (order-1), בדסקטופ מימין (order-2 בגלל RTL/LTR — נבחן ונקבע לפי מה שנראה נכון בזמן הבנייה; המטרה: פורטרט בצד שמאל של הטקסט בדסקטופ).
 
-**קטגוריה 1 — הליכי גירושין ומעמד אישי (7)**
-yishuv-sichsuch, gitin, ketuba, hatarat-nisuin, heskem-gerushin, alimut-shkufa, tzavei-hagana
+## בדיקת רספונסיביות כללית
 
-**קטגוריה 2 — ילדים, רכוש וכלכלה (8)**
-heskem-mamon, izun-mashabim, chalukat-rechush, zmanei-shehut, achrayut-horit, mzonot-yeladim, mzonot-isha, yeduim-batzibur
+בעוד ה-Hero משתנה, אעבור על ה-viewport 375px ואאסוף תיקונים למקטעים הבאים ב-`Index.tsx`:
 
-**קטגוריה 3 — ירושה, גישור וליווי משפטי (5)**
-tzavaa, gishur, hotzaa-lapoal, chadlut-pireon, litigatzia
+1. **סקשן "מתגשרים"** — כפתורי CTA `flex-wrap` כבר קיים; לוודא שהטקסט לא נחתך ושהכפתורים ב-`w-full sm:w-auto` בנייד.
+2. **כרטיסי תחומי עיסוק** — ריפוד `p-7` גדול מדי בנייד → `p-5 sm:p-7`. הכותרת `text-xl` תישאר.
+3. **QuoteStrip** — `text-2xl lg:text-3xl` תקין; לוודא `px-6` לא יוצר overflow עם ציטוטים ארוכים (`break-words`).
+4. **About** — `text-lg` בפסקאות → `text-base md:text-lg` בנייד לקריאות טובה יותר.
+5. **Services (רשימה ממוספרת)** — במובייל `grid-cols-1` כבר עובד; לוודא `gap-y-5` מספיק.
+6. **Testimonials/Articles** — `p-7` → `p-6`; grid כבר `md:grid-cols-3`.
+7. **Header** — לבדוק (בקובץ `src/components/layout/Header.tsx`) שאין overflow אופקי בנייד עם התפריט; במידת הצורך להצר padding.
+8. **ContactForm** — לוודא inputs `w-full` ולא יוצרים גלילה אופקית.
+9. גלובלי ב-`index.css`: להוסיף `html, body { overflow-x: hidden; }` אם עדיין יש גלישה אופקית לאחר התיקונים.
 
-Full Hebrew legal text will be pasted verbatim into `content` during Build mode. Each item gets one outlined lucide icon matching existing style (strokeWidth 1.5).
+## קבצים שישתנו
+- `src/pages/Index.tsx` — עיקר השינוי (Hero + התאמות padding/text-size בסקשנים לעיל).
+- `src/components/layout/Header.tsx` — רק אם תימצא בעיית רספונסיביות.
+- `src/index.css` — אולי `overflow-x-hidden` גלובלי.
 
-## Routes & pages
-
-- `/services` → `src/pages/Services.tsx` — 3 categories rendered as accordion (mobile) / tabs+accordion (desktop) via `PracticeAreasAccordion.tsx`. Deep-link via hash (`#slug`) scrolls & opens the item.
-- `/services/:slug` → `src/pages/PracticeArea.tsx` — full article page for a single area, with breadcrumb, related items from same category, contact CTA.
-- Unknown slug → 404.
-
-## Components
-
-- `src/components/PracticeAreasAccordion.tsx` — reusable, takes categories.
-- `src/components/PracticeAreasPreview.tsx` — homepage teaser: 3 category cards → link to `/services#<first-slug>`, plus "לכל תחומי העיסוק" CTA to `/services`.
-
-## Header
-
-`Header.tsx`: "שירותי המשרד" becomes `<Link to="/services">` (remove scrollIntoView handler for this item only).
-
-## Homepage
-
-Existing "תחומי עיסוק" section replaced by `<PracticeAreasPreview />`.
-
-## SEO
-
-- `/services`: title "תחומי עיסוק | ...", generic meta description listing categories.
-- `/services/:slug`: unique `<title>`, meta description (first ~155 chars of content), canonical, JSON-LD `LegalService` with `serviceType` = title.
-- `public/sitemap.xml`: add `/services` + 20 `/services/:slug` entries.
+## מה לא משתנה
+- תוכן ה-JSON (`homepage.json`).
+- מבנה הראוטים, ה-SEO, ה-Header/Footer, ה-accessibility widget.
+- כל 20 תחומי העיסוק, המבנה שלהם, וסדר הסקשנים.
+- פונטים ופלטת צבעים.
 
 ## Acceptance
-
-- Exactly 20 items, exact titles/slugs/categories above.
-- No invented items (לשון הרע, ניכור הורי, אפוטרופסות, התנגדות לצו קיום צוואה removed).
-- Header link points to `/services`.
-- Direct load of `/services/tzavaa` renders full article; `/services#ketuba` opens correct accordion item.
+- ב-375px רוחב: אין גלילה אופקית; ה-Hero נראה כטקסט + פורטרט קומפקטי מלמעלה, לא כתמונת ענק.
+- ב-1440px: פורטרט קומפקטי (max 380px) בצד, טקסט לצדו, ללא `80vh`.
+- הפורטרט תמיד מציג את הפנים (object-top).
+- כל הסקשנים האחרים נראים תקין ב-375 / 768 / 1280.
