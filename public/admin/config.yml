@@ -17,6 +17,9 @@ backend:
 
 locale: he
 
+# עריכה מקומית (npx decap-server) — פעיל רק כשהפאנל נפתח מ-localhost; לא משפיע על האתר החי
+local_backend: true
+
 # תמונות שמועלות בפאנל נשמרות ב-public/images ומוגשות מ-/images
 media_folder: "public/images"
 public_folder: "/images"

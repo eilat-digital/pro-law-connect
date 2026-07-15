@@ -1,13 +1,19 @@
 <!doctype html>
-<!-- שלד הממשק נשאר LTR (העיצוב של Decap בנוי לזה); העברית מוזרקת רק לשדות התוכן -->
-<html lang="he">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>ניהול תוכן | שירן שושני – חברת עורכי דין</title>
     <style>
-      /* ===== תיקוני RTL לפאנל Decap CMS ===== */
+      /* ===== התאמת Decap CMS לפריסת RTL מלאה =====
+         הממשק של Decap בנוי ל-LTR עם ריפוד פיזי (padding-left) שמפנה מקום
+         לתפריט הצד. ב-RTL התפריט עובר לימין, ולכן מחליפים את כיוון הריפוד —
+         זה התיקון שמונע את חפיפת התפריט עם התוכן. */
+      [class*="CollectionMain"] {
+        padding-left: 0 !important;
+        padding-right: 280px !important;
+      }
 
       /* שדות הקלדה — עברית מימין לשמאל */
       input[type="text"],
@@ -18,22 +24,17 @@
         text-align: right;
       }
 
-      /* תוויות השדות והקבוצות — יישור לימין וגופן עברי נעים */
+      /* גופן עברי נעים לתוויות ולכותרות קבוצות */
       label,
       [class*="FieldLabel"],
       [class*="ListItemTopBar"],
-      [class*="ObjectWidgetTopBar"] {
+      [class*="ObjectWidgetTopBar"],
+      [class*="SidebarHeading"],
+      [class*="CollectionTopHeading"] {
         font-family: 'Heebo', 'Segoe UI', Arial, sans-serif !important;
       }
 
-      /* כרטיסי הרשומות (כמו "דף הבית") — טקסט מיושר לימין, גובה מינימלי נעים */
-      [class*="CardBody"],
-      [class*="ListCard"] a {
-        direction: rtl;
-        text-align: right;
-      }
-
-      /* טקסטים של הודעות/רמזים (hint) בעברית */
+      /* טקסטים של רמזים (hint) מתחת לשדות */
       [class*="FieldHint"],
       [class*="ControlHint"] {
         direction: rtl;
@@ -46,7 +47,7 @@
     <!-- Decap CMS (לשעבר Netlify CMS) — התחברות דרך GitHub OAuth -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-      // עיצוב התצוגה המקדימה (הצד השני בעורך) בסגנון האתר — שם כן RTL מלא
+      // עיצוב התצוגה המקדימה (חלונית התצוגה בעורך) בסגנון האתר
       CMS.registerPreviewStyle("/admin/preview.css");
     </script>
   </body>
