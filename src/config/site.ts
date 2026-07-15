@@ -8,7 +8,7 @@ import content from "@/content/homepage.json";
 /** המרת מספר ישראלי (054-8151301) לפורמט בינלאומי (+972548151301) */
 const toIntl = (num: string) => "+972" + num.replace(/\D/g, "").replace(/^0/, "");
 
-const { phone, mobile, fax, email, address } = content.contact;
+const { phone, mobile, fax, email, address, mapUrl } = content.contact;
 
 export const site = {
   name: "שירן שושני",
@@ -23,6 +23,9 @@ export const site = {
   fax,
   email,
   address,
+  mapUrl,
+  logo: content.branding.logo,
+  footerText: content.branding.footerText,
 
   // וואטסאפ (מבוסס על מספר הנייד)
   whatsapp:

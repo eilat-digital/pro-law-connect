@@ -26,7 +26,7 @@ SPA with react-router. Routes are declared in `src/App.tsx`:
 
 ### Where content lives (edit here, not inline)
 
-- `src/content/homepage.json` — CMS-managed content: hero title/description, about paragraphs, the 20 practice areas (title+desc), and contact details (phone, mobile, fax, email, address). Edited by the site owner through Decap CMS at `/admin/` (config: `public/admin/config.yml`, backend: git-gateway → commits to `main`). Field names in `config.yml` must stay in sync with this JSON's shape.
+- `src/content/homepage.json` — CMS-managed content, grouped as: `branding` (logo path, footerText), `hero` (title, markdown description, image, ctaText/ctaLink), `about` (single markdown string, paragraphs = blank lines), `practiceAreas` (20 × title + markdown desc + optional image that replaces the lucide icon), `contact` (phone, mobile, fax, email, address, mapUrl). Markdown fields are rendered via `src/components/Markdown.tsx` (react-markdown wrapper) — never interpolate them as plain text. Field names in `public/admin/config.yml` must stay in sync with this JSON's shape. CMS media uploads land in `public/images/` (served as `/images/...`).
 - `src/config/site.ts` — imports contact details from `homepage.json`, derives intl phone formats and the WhatsApp link, and holds social URLs and site name/tagline. Every component imports from here; never hardcode contact info elsewhere.
 - `src/pages/Index.tsx` — practice-area icons are mapped by exact Hebrew title in `iconByTitle` (fallback: Scale); remaining data arrays: `services`, `testimonials` (placeholder text awaiting real client quotes), `articles`.
 - The authoritative content brief from the client is `../תוכן אתר.docx` (one directory above the repo, outside git).

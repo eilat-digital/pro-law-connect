@@ -41,7 +41,7 @@ const Header = () => {
           {/* Logo — right */}
           <button onClick={goHome} className="flex items-center gap-3 group">
             <div className="w-12 h-12 rounded-full overflow-hidden bg-black border-2 border-accent flex items-center justify-center shrink-0">
-              <img src="/logo.jpeg" alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
+              <img src={site.logo} alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col text-right leading-tight">
               <span className="text-foreground font-bold text-lg">{site.name}</span>

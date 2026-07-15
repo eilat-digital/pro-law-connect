@@ -1,0 +1,42 @@
+/* עיצוב התצוגה המקדימה בפאנל הניהול — מדמה את מראה האתר */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+
+html {
+  direction: rtl;
+}
+
+body {
+  font-family: 'Heebo', Arial, sans-serif;
+  background: hsl(36 38% 93%);
+  color: hsl(0 0% 10%);
+  line-height: 1.8;
+  padding: 24px;
+  text-align: right;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: hsl(0 0% 10%);
+}
+
+h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 0.6em; }
+h2 { font-size: 1.6rem; margin: 1em 0 0.5em; }
+
+a { color: hsl(29 37% 42%); text-decoration: underline; }
+strong { font-weight: 700; }
+
+ul, ol { padding-right: 1.4em; margin: 0.6em 0; }
+li { margin-bottom: 0.3em; }
+
+img { max-width: 100%; height: auto; border: 1px solid hsl(36 20% 82%); }
+
+p { margin: 0 0 1em; }
+
+blockquote {
+  border-right: 4px solid hsl(29 37% 57%);
+  padding-right: 1em;
+  margin: 1em 0;
+  color: hsl(0 0% 30%);
+  font-family: 'Frank Ruhl Libre', 'Times New Roman', serif;
+}

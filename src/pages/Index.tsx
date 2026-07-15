@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import ContactForm from "@/components/sections/ContactForm";
 import FloatingButtons from "@/components/FloatingButtons";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
+import Markdown from "@/components/Markdown";
 import { site } from "@/config/site";
 import content from "@/content/homepage.json";
 import {
@@ -57,7 +58,7 @@ const iconByTitle: Record<string, LucideIcon> = {
   "ליטיגציה": Landmark,
 };
 
-const practiceAreas: { title: string; desc: string; Icon: LucideIcon }[] =
+const practiceAreas: { title: string; desc: string; image?: string; Icon: LucideIcon }[] =
   content.practiceAreas.map((p) => ({ ...p, Icon: iconByTitle[p.title] ?? Scale }));
 
 const services = [
@@ -174,7 +175,7 @@ const Index = () => {
           {/* HERO */}
           <section id="hero" className="relative w-full h-[55vh] md:h-[80vh] min-h-[400px] md:min-h-[520px] overflow-hidden">
             <img
-              src="/shoshani-portrait.jpeg"
+              src={content.hero.image}
               alt="עו״ד שירן שושני-אוכמן"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
@@ -182,14 +183,22 @@ const Index = () => {
             <div className="relative container mx-auto px-6 h-full flex items-center justify-start">
               <div className="max-w-md text-right">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-accent bg-black mb-6">
-                  <img src="/logo.jpeg" alt="לוגו שירן שושני" className="w-full h-full object-cover" />
+                  <img src={site.logo} alt="לוגו שירן שושני" className="w-full h-full object-cover" />
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-3 leading-tight">
                   {content.hero.title}
                 </h1>
-                <p className="text-foreground/80 text-base leading-relaxed">
+                <Markdown className="text-foreground/80 text-base leading-relaxed">
                   {content.hero.description}
-                </p>
+                </Markdown>
+                {content.hero.ctaText && (
+                  <a
+                    href={content.hero.ctaLink || "#contact"}
+                    className="inline-block mt-6 px-8 py-3 bg-accent text-accent-foreground font-bold rounded-sm hover:opacity-90 transition-opacity"
+                  >
+                    {content.hero.ctaText}
+                  </a>
+                )}
               </div>
             </div>
           </section>
@@ -245,18 +254,28 @@ const Index = () => {
               </h2>
               <div className="w-16 h-px bg-accent mx-auto mb-14" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {practiceAreas.map(({ title, desc, Icon }) => (
+                {practiceAreas.map(({ title, desc, image, Icon }) => (
                   <article
                     key={title}
                     className="bg-card border border-border p-7 hover:border-accent transition-colors group"
                   >
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-full border border-accent/40 text-accent mb-5 group-hover:bg-accent group-hover:text-accent-foreground transition-colors flex-shrink-0">
-                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={1.5} />
-                    </div>
+                    {image ? (
+                      <img
+                        src={image}
+                        alt={title}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border border-accent/40 mb-5"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-full border border-accent/40 text-accent mb-5 group-hover:bg-accent group-hover:text-accent-foreground transition-colors flex-shrink-0">
+                        <Icon className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={1.5} />
+                      </div>
+                    )}
                     <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
                       {title}
                     </h3>
-                    <p className="text-foreground/70 leading-relaxed text-sm">{desc}</p>
+                    <Markdown className="text-foreground/70 leading-relaxed text-sm space-y-2">
+                      {desc}
+                    </Markdown>
                   </article>
                 ))}
               </div>
@@ -279,9 +298,7 @@ const Index = () => {
                 מייסדת ובעלת המשרד
               </h3>
               <div className="space-y-5 text-foreground/85 leading-loose text-lg">
-                {content.about.map((paragraph) => (
-                  <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-                ))}
+                <Markdown className="space-y-5">{content.about}</Markdown>
                 <p>
                   <Link to="/mitgashrim" className="text-accent font-semibold hover:underline">
                     לתוכנית "מתגשרים – מאירים לכם את הדרך" »

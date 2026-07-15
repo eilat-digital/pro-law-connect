@@ -1,7 +1,6 @@
 # הגדרות פאנל הניהול (Decap CMS)
-# הפאנל זמין בכתובת: https://<האתר-שלך>/admin/
-# אימות: GitHub OAuth דרך שירות ה-OAuth של Netlify (לא Netlify Identity שהוצא משימוש).
-# הגדרה חד-פעמית: OAuth App ב-GitHub + Install provider ב-Netlify — ראו הנחיות-עריכה.md
+# הפאנל זמין בכתובת: https://shiran-shoshani-law.netlify.app/admin/
+# אימות: GitHub OAuth דרך שירות ה-OAuth של Netlify.
 
 backend:
   name: github
@@ -18,9 +17,9 @@ backend:
 
 locale: he
 
-# תיקיית התמונות של הפרויקט (public/ מוגשת כשורש האתר ב-Vite)
-media_folder: "public"
-public_folder: "/"
+# תמונות שמועלות בפאנל נשמרות ב-public/images ומוגשות מ-/images
+media_folder: "public/images"
+public_folder: "/images"
 
 collections:
   - name: "site"
@@ -30,34 +29,98 @@ collections:
         label: "דף הבית"
         file: "src/content/homepage.json"
         fields:
-          - label: "אזור הפתיחה (Hero)"
+          # ---- קבוצה 1: עיצוב ולוגו ----
+          - label: "🎨 עיצוב ולוגו"
+            name: "branding"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "לוגו המשרד"
+                name: "logo"
+                widget: "image"
+                hint: "מופיע בתפריט העליון ובתחתית האתר. מומלץ תמונה מרובעת."
+              - label: "טקסט נוסף בשורת זכויות היוצרים"
+                name: "footerText"
+                widget: "string"
+                required: false
+                hint: "אופציונלי — יופיע ליד © והשנה (השנה מתעדכנת אוטומטית)."
+
+          # ---- קבוצה 2: אזור ראשי (Hero) ----
+          - label: "🏠 אזור ראשי (Hero)"
             name: "hero"
             widget: "object"
+            collapsed: true
             fields:
-              - { label: "כותרת ראשית", name: "title", widget: "string" }
-              - { label: "תיאור", name: "description", widget: "text" }
+              - label: "כותרת ראשית"
+                name: "title"
+                widget: "string"
+              - label: "תיאור קצר"
+                name: "description"
+                widget: "markdown"
+                buttons: ["bold", "italic", "link"]
+                editor_components: []
+                hint: "אפשר להדגיש מילים ולהוסיף קישורים."
+              - label: "תמונת רקע ראשית"
+                name: "image"
+                widget: "image"
+                hint: "תמונת התדמית הגדולה בראש הדף."
+              - label: "טקסט כפתור הנעה לפעולה"
+                name: "ctaText"
+                widget: "string"
+                required: false
+                hint: "השאירו ריק כדי להסתיר את הכפתור."
+              - label: "קישור הכפתור"
+                name: "ctaLink"
+                widget: "string"
+                required: false
+                default: "#contact"
+                hint: "לדוגמה: #contact לטופס, או כתובת מלאה."
 
-          - label: "אודות המשרד"
+          # ---- קבוצה 3: אודות המשרד ----
+          - label: "👩‍⚖️ אודות המשרד"
             name: "about"
-            widget: "list"
-            label_singular: "פסקה"
-            field: { label: "פסקה", name: "paragraph", widget: "text" }
+            widget: "markdown"
+            buttons: ["bold", "italic", "bulleted-list", "numbered-list", "link"]
+            editor_components: []
+            hint: "עורך עשיר: הדגשה, רשימות וקישורים. פסקאות מופרדות בשורה ריקה."
 
-          - label: "תחומי עיסוק"
+          # ---- תחומי עיסוק ----
+          - label: "⚖️ תחומי עיסוק"
             name: "practiceAreas"
             widget: "list"
             label_singular: "תחום עיסוק"
+            collapsed: true
+            minimize_collapsed: true
             summary: "{{fields.title}}"
+            hint: "גררו כרטיסיות לשינוי הסדר. לחצו על + להוספה."
             fields:
-              - { label: "שם התחום", name: "title", widget: "string" }
-              - { label: "תיאור", name: "desc", widget: "text" }
+              - label: "שם התחום"
+                name: "title"
+                widget: "string"
+              - label: "תיאור"
+                name: "desc"
+                widget: "markdown"
+                buttons: ["bold", "italic", "link"]
+                editor_components: []
+              - label: "תמונה/אייקון מותאם"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "אופציונלי — אם לא תועלה תמונה, יוצג אייקון אוטומטי לפי שם התחום."
 
-          - label: "פרטי יצירת קשר"
+          # ---- קבוצה 4: פרטי התקשרות ומפת הגעה ----
+          - label: "📞 פרטי התקשרות ומפת הגעה"
             name: "contact"
             widget: "object"
+            collapsed: true
             fields:
               - { label: "טלפון", name: "phone", widget: "string" }
               - { label: "נייד", name: "mobile", widget: "string" }
               - { label: "פקס", name: "fax", widget: "string" }
               - { label: "אימייל", name: "email", widget: "string" }
-              - { label: "כתובת", name: "address", widget: "string" }
+              - { label: "כתובת פיזית (אילת)", name: "address", widget: "string" }
+              - label: "קישור למפת הגעה (Google Maps)"
+                name: "mapUrl"
+                widget: "string"
+                required: false
+                hint: "הכתובת בתחתית האתר תהפוך לקישור למפה."

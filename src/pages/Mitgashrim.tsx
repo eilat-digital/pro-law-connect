@@ -55,7 +55,7 @@ const Mitgashrim = () => {
           <section className="py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-6 max-w-4xl text-center">
               <img
-                src="/mitgashrim-logo.jpeg"
+                src="/images/mitgashrim-logo.jpeg"
                 alt="מתגשרים – לוגו התוכנית"
                 className="w-36 h-36 md:w-44 md:h-44 object-cover rounded-full border-2 border-accent mx-auto mb-8"
               />

@@ -31,7 +31,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-12 h-12 rounded-full overflow-hidden bg-black border-2 border-accent flex items-center justify-center shrink-0">
-                <img src="/logo.jpeg" alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
+                <img src={site.logo} alt="שירן שושני - לוגו" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-lg">{site.name}</span>
@@ -76,7 +76,19 @@ const Footer = () => {
             <ul className="space-y-3 text-primary-foreground/75 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                <span>{site.address}</span>
+                {site.mapUrl ? (
+                  <a
+                    href={site.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-accent transition-colors underline underline-offset-2"
+                    title="פתיחת מפת הגעה"
+                  >
+                    {site.address}
+                  </a>
+                ) : (
+                  <span>{site.address}</span>
+                )}
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-accent shrink-0" />
@@ -105,7 +117,10 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/10 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-primary-foreground/55 text-xs">
-          <span>© {year} {site.fullTitle}. כל הזכויות שמורות.</span>
+          <span>
+            © {year} {site.fullTitle}. כל הזכויות שמורות.
+            {site.footerText ? ` · ${site.footerText}` : ""}
+          </span>
           <div className="flex items-center gap-4">
             <Dialog>
               <DialogTrigger asChild>
