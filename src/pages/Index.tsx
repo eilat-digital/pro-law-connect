@@ -224,7 +224,7 @@ const Index = () => {
                 {practiceAreas.map(({ title, desc, image, Icon }) => (
                   <article
                     key={title}
-                    className="bg-card border border-border p-7 hover:border-accent transition-colors group"
+                    className="bg-card border border-border p-5 sm:p-7 hover:border-accent transition-colors group"
                   >
                     {image ? (
                       <img
