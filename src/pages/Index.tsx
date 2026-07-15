@@ -131,32 +131,44 @@ const Index = () => {
 
         <main className="pt-20">
           {/* HERO */}
-          <section id="hero" className="relative w-full h-[55vh] md:h-[80vh] min-h-[400px] md:min-h-[520px] overflow-hidden">
-            <img
-              src={content.hero.image}
-              alt="עו״ד שירן שושני-אוכמן"
-              className="absolute inset-0 w-full h-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-l from-background/90 via-background/45 via-[22%] to-transparent to-[45%]" />
-            <div className="relative container mx-auto px-6 h-full flex items-center justify-start">
-              <div className="max-w-md text-right">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-accent bg-black mb-6">
-                  <img src={site.logo} alt="לוגו שירן שושני" className="w-full h-full object-cover" />
+          <section
+            id="hero"
+            className="relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background"
+          >
+            <div className="container mx-auto px-5 md:px-6 py-12 md:py-20 lg:py-24">
+              <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+                {/* Text */}
+                <div className="md:col-span-7 order-2 md:order-1 text-right">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-accent bg-black mb-5 md:mb-6 mx-auto md:mx-0">
+                    <img src={site.logo} alt="לוגו שירן שושני" className="w-full h-full object-cover" />
+                  </div>
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight text-center md:text-right">
+                    {content.hero.title}
+                  </h1>
+                  <Markdown className="text-foreground/80 text-base md:text-lg leading-relaxed text-center md:text-right">
+                    {content.hero.description}
+                  </Markdown>
+                  {content.hero.ctaText && (
+                    <div className="text-center md:text-right">
+                      <a
+                        href={content.hero.ctaLink || "#contact"}
+                        className="inline-block mt-6 px-8 py-3 bg-accent text-accent-foreground font-bold rounded-sm hover:opacity-90 transition-opacity"
+                      >
+                        {content.hero.ctaText}
+                      </a>
+                    </div>
+                  )}
                 </div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-3 leading-tight">
-                  {content.hero.title}
-                </h1>
-                <Markdown className="text-foreground/80 text-base leading-relaxed">
-                  {content.hero.description}
-                </Markdown>
-                {content.hero.ctaText && (
-                  <a
-                    href={content.hero.ctaLink || "#contact"}
-                    className="inline-block mt-6 px-8 py-3 bg-accent text-accent-foreground font-bold rounded-sm hover:opacity-90 transition-opacity"
-                  >
-                    {content.hero.ctaText}
-                  </a>
-                )}
+                {/* Portrait */}
+                <div className="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-start">
+                  <div className="relative w-44 sm:w-56 md:w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-accent/30 shadow-xl">
+                    <img
+                      src={content.hero.image}
+                      alt="עו״ד שירן שושני-אוכמן"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
