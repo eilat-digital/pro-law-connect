@@ -135,14 +135,14 @@ const Index = () => {
             id="hero"
             className="relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background"
           >
-            <div className="container mx-auto px-5 md:px-6 py-12 md:py-20 lg:py-24">
-              <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+            <div className="container mx-auto px-5 md:px-6 py-10 md:py-16 lg:py-20">
+              <div className="grid md:grid-cols-12 gap-6 md:gap-10 lg:gap-12 items-center">
                 {/* Text */}
                 <div className="md:col-span-7 order-2 md:order-1 text-right">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-accent bg-black mb-5 md:mb-6 mx-auto md:mx-0">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-accent bg-black mb-4 md:mb-5 mx-auto md:mx-0">
                     <img src={site.logo} alt="לוגו שירן שושני" className="w-full h-full object-cover" />
                   </div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight text-center md:text-right">
+                  <h1 className="text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold text-foreground mb-4 leading-tight text-center md:text-right">
                     {content.hero.title}
                   </h1>
                   <Markdown className="text-foreground/80 text-base md:text-lg leading-relaxed text-center md:text-right">
@@ -161,11 +161,12 @@ const Index = () => {
                 </div>
                 {/* Portrait */}
                 <div className="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-start">
-                  <div className="relative w-44 sm:w-56 md:w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-accent/30 shadow-xl">
+                  <div className="relative w-36 sm:w-44 md:w-full md:max-w-[300px] lg:max-w-[340px] aspect-[4/5] rounded-2xl overflow-hidden border border-accent/30 shadow-xl">
                     <img
                       src={content.hero.image}
                       alt="עו״ד שירן שושני-אוכמן"
                       className="w-full h-full object-cover object-top"
+                      loading="eager"
                     />
                   </div>
                 </div>
