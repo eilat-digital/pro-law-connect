@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&display=swap');
 
 @tailwind base;
@@ -8,54 +7,54 @@
 
 @layer base {
   :root {
-    /* Cream & Navy — light editorial palette (#FDF7E4 base) */
-    --background: 48 86% 94%;
-    --foreground: 220 30% 15%;
+    /* Neutral-Gold Elegant palette */
+    --background: 36 38% 93%;
+    --foreground: 0 0% 10%;
 
-    --card: 45 70% 97%;
-    --card-foreground: 220 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 45 70% 97%;
-    --popover-foreground: 220 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 220 35% 18%;
-    --primary-foreground: 48 86% 94%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 36 38% 96%;
 
-    --secondary: 215 40% 32%;
-    --secondary-foreground: 48 86% 94%;
+    --secondary: 29 37% 57%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 45 45% 88%;
-    --muted-foreground: 220 15% 38%;
+    --muted: 36 25% 88%;
+    --muted-foreground: 0 0% 38%;
 
-    --accent: 215 50% 30%;
-    --accent-foreground: 48 86% 94%;
+    --accent: 29 37% 57%;
+    --accent-foreground: 0 0% 10%;
 
-    --destructive: 0 75% 45%;
+    --destructive: 0 75% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 25% 80%;
-    --input: 45 25% 80%;
-    --ring: 215 50% 30%;
+    --border: 36 20% 82%;
+    --input: 36 20% 82%;
+    --ring: 29 37% 57%;
 
     --radius: 0.25rem;
 
-    /* Legacy tokens — remapped to cream/navy */
-    --gold: 215 50% 30%;
-    --gold-light: 215 45% 42%;
-    --gold-dark: 220 40% 22%;
-    --navy: 220 35% 18%;
-    --navy-light: 220 30% 28%;
-    --navy-muted: 220 20% 40%;
-    --cream: 48 86% 94%;
-    --cream-dark: 45 45% 88%;
+    /* Legacy tokens — remapped to neutral-gold */
+    --gold: 29 37% 57%;
+    --gold-light: 32 45% 70%;
+    --gold-dark: 28 30% 42%;
+    --navy: 0 0% 10%;
+    --navy-light: 0 0% 18%;
+    --navy-muted: 0 0% 30%;
+    --cream: 36 38% 96%;
+    --cream-dark: 36 25% 88%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(48 86% 96%) 0%, hsl(48 86% 94%) 50%, hsl(45 45% 88%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(220 40% 22%) 0%, hsl(215 50% 30%) 50%, hsl(215 45% 42%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(45 70% 97%) 0%, hsl(48 86% 94%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(36 38% 96%) 0%, hsl(36 38% 93%) 50%, hsl(36 25% 88%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(28 30% 42%) 0%, hsl(29 37% 57%) 50%, hsl(32 45% 70%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(36 38% 96%) 100%);
 
-    --shadow-elegant: 0 10px 40px -10px hsl(220 40% 15% / 0.15);
-    --shadow-gold: 0 8px 30px -8px hsl(215 50% 30% / 0.25);
-    --shadow-card: 0 4px 20px -6px hsl(220 40% 15% / 0.08);
+    --shadow-elegant: 0 10px 40px -10px hsl(0 0% 0% / 0.15);
+    --shadow-gold: 0 8px 30px -8px hsl(29 37% 57% / 0.4);
+    --shadow-card: 0 4px 20px -6px hsl(0 0% 0% / 0.08);
 
     --sidebar-background: 0 0% 10%;
     --sidebar-foreground: 36 38% 96%;
@@ -173,14 +172,12 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'IBM Plex Sans Hebrew', 'IBM Plex Sans', system-ui, sans-serif;
+    @apply bg-background text-foreground font-heebo antialiased;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-    font-family: 'Libre Baskerville', 'Frank Ruhl Libre', Georgia, serif;
+    @apply font-heebo font-bold tracking-tight;
   }
 }
 
