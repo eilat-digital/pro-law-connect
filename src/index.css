@@ -172,14 +172,12 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'IBM Plex Sans Hebrew', 'IBM Plex Sans', system-ui, sans-serif;
+    @apply bg-background text-foreground font-heebo antialiased;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-    font-family: 'Libre Baskerville', 'Frank Ruhl Libre', Georgia, serif;
+    @apply font-heebo font-bold tracking-tight;
   }
 }
 
